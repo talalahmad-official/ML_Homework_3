@@ -8,10 +8,7 @@ from torch.utils.data import Dataset
 from tqdm import tqdm
 
 def create_mapped_folder(csv_path, src_img_dir, dest_root_dir):
-    """
-    Creates a folder structure where images are moved into subfolders 
-    named after their labels (e.g., raw_dataset/frog/1.png).
-    """
+
     # 1. Load labels
     df = pd.read_csv(csv_path)
     
@@ -38,11 +35,6 @@ def create_mapped_folder(csv_path, src_img_dir, dest_root_dir):
 
 class raw_dataset(Dataset):
     def __init__(self, root_dir, transform=None):
-        """
-        Args:
-            root_dir (string): Directory with all the class subfolders.
-            transform (callable, optional): Optional transform to be applied.
-        """
         self.root_dir = root_dir
         self.transform = transform
         
@@ -70,7 +62,7 @@ class raw_dataset(Dataset):
             
         return image, label
 
-# To run the mapping logic directly:
+
 if __name__ == "__main__":
     CSV_PATH = '/content/cifar_dataset/trainLabels.csv'
     SRC_DIR = '/content/cifar_dataset/train'
