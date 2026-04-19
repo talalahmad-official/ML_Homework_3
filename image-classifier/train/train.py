@@ -4,13 +4,9 @@ import torch.nn as nn
 import torch.optim as optim
 
 def train_model(model, train_loader, epochs, lr, optimizer_type, device):
-    """
-    Step 7: Training function. [cite: 58-68]
-    """
-    # Step 5: Loss Function [cite: 54-55]
+
     criterion = nn.CrossEntropyLoss()
     
-    # Step 6: Optimizer [cite: 56-57]
     if optimizer_type.lower() == 'adam':
         optimizer = optim.Adam(model.parameters(), lr=lr)
     else:
