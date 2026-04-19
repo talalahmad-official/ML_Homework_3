@@ -5,12 +5,8 @@ import random
 from PIL import Image
 from torch.utils.data import Dataset
 
-# --- THE UTILITY LOGIC (Your current split logic) ---
 def split_raw_into_final(src_root, dest_root, train_ratio=0.8):
-    """
-    Takes images from 'raw_dataset/class/' and splits them into 
-    'final_dataset/train/class/' and 'final_dataset/test/class/'.
-    """
+
     for mode in ['train', 'test']:
         os.makedirs(os.path.join(dest_root, mode), exist_ok=True)
     
@@ -24,18 +20,14 @@ def split_raw_into_final(src_root, dest_root, train_ratio=0.8):
         random.shuffle(imgs)
         
         split_idx = int(len(imgs) * train_ratio)
-        # Logic to copy images into the train and test folders
+
         for i, img in enumerate(imgs):
             target = 'train' if i < split_idx else 'test'
             shutil.copy2(os.path.join(src_root, cls, img), 
                          os.path.join(dest_root, target, cls, img))
 
-# --- THE MANDATORY CLASS (Step 2 of PDF) ---
 class CIFAR10Dataset(Dataset):
-    """
-    Requirement: Implement custom dataset class inheriting from torch Dataset[cite: 26].
-    Overrides: __len__ and __getitem__[cite: 31, 32].
-    """
+
     def __init__(self, root_dir, transform=None):
         self.root_dir = root_dir
         self.transform = transform
