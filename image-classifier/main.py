@@ -47,7 +47,6 @@ def run_experiments():
         print(f"Train Accuracy: {history['train_acc'][-1]:.2f}%")
         print(f"Test Accuracy:  {test_acc:.2f}%")
         
-        # UPDATED: Save the plot with a unique name for each experiment 
         plot_path = f"image-classifier/plots/exp_{i+1}_results.png"
         plot_training_history(history, save_path=plot_path)
         
