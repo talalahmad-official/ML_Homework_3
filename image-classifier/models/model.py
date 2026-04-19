@@ -8,7 +8,6 @@ class CIFAR10CNN(nn.Module):
     def __init__(self):
         super(CIFAR10CNN, self).__init__()
         
-        # --- Convolutional Layers (Feature Extractors) ---
         
         # Layer 1: Input (3, 32, 32) -> Output (32, 32, 32)
         self.conv1 = nn.Conv2d(in_channels=3, out_channels=32, kernel_size=3, padding=1)
@@ -21,10 +20,8 @@ class CIFAR10CNN(nn.Module):
         # Layer 3: Input (64, 8, 8) -> Output (128, 8, 8)
         self.conv3 = nn.Conv2d(in_channels=64, out_channels=128, kernel_size=3, padding=1)
         self.pool3 = nn.MaxPool2d(kernel_size=2, stride=2) # Shrunk to 4x4
+
         
-        # --- Fully Connected Layers (The Classifier) ---
-        
-        # MATH UPDATE: 128 channels * 4 height * 4 width = 2048
         self.fc1 = nn.Linear(128 * 4 * 4, 256) # Increased neurons to 256
         self.fc2 = nn.Linear(256, 10)          # 10 output classes
 
